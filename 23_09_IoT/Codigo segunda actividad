@@ -1,0 +1,45 @@
+// Pines de los LEDs
+const int ledVerde   = 2;
+const int ledAmarillo = 3;
+const int ledRojo    = 4;
+const int ledAzul    = 5;
+
+// Pin de la fotoresistencia
+const int LDR = A0;
+
+void setup() {
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledAmarillo, OUTPUT);
+  pinMode(ledRojo, OUTPUT);
+  pinMode(ledAzul, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  int luz = analogRead(LDR);
+
+  Serial.println(luz);
+
+  // Apagar todos los LEDs
+  digitalWrite(ledVerde, LOW);
+  digitalWrite(ledAmarillo, LOW);
+  digitalWrite(ledRojo, LOW);
+  digitalWrite(ledAzul, LOW);
+
+  // Encender LEDs según la cantidad de luz
+  if (luz < 250) {
+    digitalWrite(ledVerde, HIGH);
+  }
+  else if (luz < 500) {
+    digitalWrite(ledAmarillo, HIGH);
+  }
+  else if (luz < 750) {
+    digitalWrite(ledRojo, HIGH);
+  }
+  else {
+    digitalWrite(ledAzul, HIGH);
+  }
+
+  delay(100);
+}
